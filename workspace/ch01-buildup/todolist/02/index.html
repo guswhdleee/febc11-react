@@ -8,7 +8,7 @@
   <body>
     <div id="todo">
       <header>
-        <h1>Todo List - 목록 조회 :)</h1>
+        <h1>Todo List - 등록 😊</h1>
         <p>파일 경로: <span id="filepath"></span></p>
       </header>
       <div id="main">
@@ -17,8 +17,8 @@
             <li>
               <h2>쇼핑 목록</h2>
               <div class="todoinput">
-                <input type="text" autofocus />
-                <button type="button">추가</button>
+                <input type="text" autofocus onkeyup="handleAddKeyup(event)" />
+                <button type="button" onclick="handleAdd()">추가</button>
               </div>
               <ul class="todolist">
                 <li>
@@ -141,8 +141,37 @@
         return liElem;
       }
 
+      // "추가" 클릭 이벤트 핸들러
+      const handleAdd = () => {
+        const inputElem = document.querySelector(".todoinput > input");
+        if (inputElem.value.trim() !== "") {
+          addItem(inputElem.value);
+          inputElem.value = "";
+          inputElem.focus();
+        }
+      };
+
+      // 엔터 이벤트
+      const handleAddKeyup = (event) => {
+        if (event.key === "Enter") handleAdd();
+      };
+
       // 할일 추가
-      function addItem(title) {}
+      function addItem(title) {
+        const item = {
+          no: itemList[itemList.length - 1].no + 1,
+          title,
+          done: false,
+        };
+
+        // ToDo : 데이터 갱신
+        itemList.push(item);
+
+        // ToDo :  화면 갱신
+        const itemElem = getTodoItemElem(item);
+        const todolistElem = document.querySelector(".todolist");
+        todolistElem.appendChild(itemElem);
+      }
 
       // 완료/미완료 처리
       function toggleDone(no) {}
