@@ -27,11 +27,14 @@
 
     function TodoInput({ addItem }){
       const [title, setTitle] = React.useState('');
+      const [nextId, setNextId] = React.useState(4);
 
       const handleAdd = () => {
         if(title.trim() !== ''){
-          const item = { _id: 4, title, done: false };
+          const item = { _id: nextId, title, done: false };
           addItem(item);
+          
+          setNextId(nextId + 1);
           setTitle('');
         }
       };
