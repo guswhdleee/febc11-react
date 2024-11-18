@@ -15,6 +15,7 @@ function App() {
   // const [email, setEmail] = useState('');
   // const [cellphone, setCellphone] = useState('010');
 
+  // 사용자의 입력 데이터를 상태로 관리
   const [user, setUser] = useState({
     name: '',
     email: '',

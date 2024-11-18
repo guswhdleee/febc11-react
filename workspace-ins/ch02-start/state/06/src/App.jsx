@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const errorStyle = {
@@ -20,6 +19,7 @@ function App() {
     }
   });
 
+  // handleSubmit에서 검증을 통과할 경우 호출됨
   const onSubmit = (user) => {
     console.log('서버에 전송', user);
   };
