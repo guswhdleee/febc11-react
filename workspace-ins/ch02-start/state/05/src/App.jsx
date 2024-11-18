@@ -63,20 +63,21 @@ function App() {
       newErrors = {
         cellphone: { message: '휴대폰 번호를 입력하세요.' }
       };
-    }else if(emailExp.test(user.email)){
+    }else if(emailExp.test(user.email) === false){
       newErrors = {
-        cellphone: { message: '이메일 양식에 맞지 않습니다.' }
+        email: { message: '이메일 양식에 맞지 않습니다.' }
       };
-    }else if(cellphoneExp.test(user.email)){
+    }else if(cellphoneExp.test(user.cellphone) === false){
       newErrors = {
         cellphone: { message: '휴대폰 형식에 맞지 않습니다.' }
       };
     }
 
-    if(newErrors){
+    if(newErrors){ // 검증 실패
       setErrors(newErrors);
-    }else{
+    }else{ // 검증 통과
       setErrors({});
+      console.log('서버에 전송', user);
     }
   };
 
