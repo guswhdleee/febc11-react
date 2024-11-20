@@ -8,6 +8,7 @@ function TodoContainer(){
     { _id: 1, title: '두부', done: true} ,
     { _id: 2, title: '계란', done: false },
     { _id: 3, title: '라면', done: true },
+    { _id: 4, title: '김치', done: true },
   ];
 
   const [itemList, itemListDispatch] = useReducer(TodoReducer, sampleItemList);
@@ -15,7 +16,7 @@ function TodoContainer(){
 
   // 할일 추가
   const addItem = (title) => {
-    itemListDispatch({ type: 'ADD', value: {_id: nextId, title, done: false } });
+    itemListDispatch({ type: 'ADD', value: { _id: nextId, title, done: false } });
     setNextId(nextId + 1);
   };
 
