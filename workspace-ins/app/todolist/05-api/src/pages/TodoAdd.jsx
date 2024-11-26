@@ -9,13 +9,21 @@ function TodoAdd() {
   const onSubmit = (item) => {
     console.log('서버에 전송', item);
 
+
+    const timer = setTimeout(() => {
+      xhr.abort(); // 요청 취소
+    }, 2000);
+
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://todo-api.fesp.shop/api/todolist');
+    xhr.open('POST', 'https://todo-api.fesp.shop/api/todolist?delay=100000000');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.responseType = 'json'; // xhr.response에 저장되는 응답 데이터가 JSON.parse() 결과로 저장됨
 
     // 서버로부터 응답이 도착하면 호출되는 함수
     xhr.onload = () => {
+      
+      clearTimeout(timer);
+
       if(xhr.status >= 200 && xhr.status < 300){
         console.log(xhr.response);
         alert('할일이 추가 되었습니다.');
@@ -25,6 +33,10 @@ function TodoAdd() {
         console.error('서버에서 에러 응답', xhr.status, xhr.response);
         alert(xhr.response.error?.message || '할일 추가에 실패했습니다.');
       }
+    };
+
+    xhr.onabort = () => {
+      alert('타임 아웃');
     };
 
     xhr.onerror = () => {
