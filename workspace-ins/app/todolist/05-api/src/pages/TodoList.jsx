@@ -89,7 +89,7 @@ function TodoList() {
         </ul>
       </div>
 
-      { data && <Pagination totalPages={ data?.pagination.totalPages } current={ data?.pagination.page }/> }
+      { data && <Pagination totalPages={ data.pagination.totalPages } current={ data.pagination.page }/> }
 
     </div>
   );
