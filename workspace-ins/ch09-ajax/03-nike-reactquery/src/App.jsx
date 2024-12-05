@@ -38,6 +38,7 @@ function App() {
     queryKey: ['상품상세조회번호는두번째요소에', 7], // 캐시에 사용할 키값을 지정(7번 상품)
     queryFn: () => axios.get(`/products/7`), // 서버에 ajax 요청 코드(Promise 반환)
     select: res => res.data.item,
+    // refetchInterval: 1000*3,
   });
 
   // 상품 구매
