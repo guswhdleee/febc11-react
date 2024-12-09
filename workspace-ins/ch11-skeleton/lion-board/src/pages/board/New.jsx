@@ -1,20 +1,37 @@
 import useAxiosInstance from "@hooks/useAxiosInstance";
-import { useMutation } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import InputError from "@components/InputError";
 
 export default function New() {
+
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const axios = useAxiosInstance();
   const { type, _id } = useParams();
 
+  const queryClient = useQueryClient();
+
   const addItem = useMutation({
-    mutationFn: () => axios.get(`/posts/${_id}`),
-    select: res => res.data,
-    staleTime: 1000*10,
+    mutationFn: formData => {
+      const body = {
+        title: formData.title,
+        content: formData.content,
+        type: type,
+      };
+      return axios.post(`/posts`, body);
+    },
+    onSuccess: () => {
+      alert('게시물이 등록되었습니다.');
+      queryClient.invalidateQueries(['posts', type]);
+      navigate(`/${type}`);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
   });
 
   return (
@@ -33,7 +50,7 @@ export default function New() {
               className="w-full py-2 px-4 border rounded-md dark:bg-gray-700 border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
               { ...register('title', { required: '제목은 필수입니다.' }) }
             />
-            <InputError target={ errors.title } />
+            <InputError />
           </div>
           <div className="my-4">
             <label className="block text-lg content-center" htmlFor="content">내용</label>
