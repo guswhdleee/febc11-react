@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function Detail() {
-  const navigate = useNavigate();
+  
   const axios = useAxiosInstance();
   const { type, _id } = useParams();
 
@@ -15,6 +15,7 @@ export default function Detail() {
     staleTime: 1000*10,
   });
 
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const removeItem = useMutation({
