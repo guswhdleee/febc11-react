@@ -1,14 +1,14 @@
 import useAxiosInstance from "@hooks/useAxiosInstance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 CommentListItem.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.number.isRequired,
     user: PropTypes.shape({
       name: PropTypes.string,
-      image: PropTypes.string,
+      image: PropTypes.object,
     }).isRequired,
     content: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
@@ -33,7 +33,7 @@ export default function CommentListItem({ item }) {
         { item.user.image && (
           <img
             className="w-8 mr-2 rounded-full"
-            src={`https://api.fesp.shop${item.user.image.path}`}
+            src={`https://11.fesp.shop${item.user.image.path}`}
             alt={`${ item.user.name } 프로필 이미지`}
           />
         ) }

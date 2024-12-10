@@ -10,6 +10,8 @@ export default function Signup() {
   const axios = useAxiosInstance();
   const addUser = useMutation({
     mutationFn: async userInfo => {
+      // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', attach: File }
+
       // 이미지 먼저 업로드
       if(userInfo.attach.length > 0){
         const imageFormData = new FormData();
@@ -25,10 +27,13 @@ export default function Signup() {
         });
 
         userInfo.image = fileRes.data.item[0];
+        // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', attach: File, image: { orginalname: '', name: '', path: '' } }
         delete userInfo.attach;
+        // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', image: { orginalname: '', name: '', path: '' } }
       }
 
       userInfo.type = 'user';
+      // userInfo { type: 'user', name: '무지', email: 'aa@bb.cc', password: '11111111', image: { orginalname: '', name: '', path: '' } }
 
       console.log(userInfo);
       return axios.post(`/users`, userInfo);
