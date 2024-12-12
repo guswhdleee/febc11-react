@@ -1,6 +1,5 @@
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
-import { useTheme } from "styled-components";
 import useThemeStore from "@zustand/themeStore";
 
 function App() {
