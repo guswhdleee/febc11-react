@@ -22,7 +22,7 @@ function TodoAdd() {
     onSuccess: () => {
       alert("할일이 추가 되었습니다.");
       // 지정한 키의 쿼리를 무효화
-      QueryClient.invalidateQueries(["todolist"]);
+      QueryClient.invalidateQueries({ queryKey: ["todolist"] });
       // 할일 목록으로 이동
       navigate(-1);
     },

@@ -39,7 +39,7 @@ function TodoEdit() {
     onSuccess: () => {
       alert("할일이 수정 되었습니다.");
       // 지정한 키의 쿼리를 무효화
-      QueryClient.invalidateQueries(["todolist"]);
+      QueryClient.invalidateQueries({ queryKey: "todolist" });
       // 할일 상세보기로 이동
       navigate(-1);
     },
