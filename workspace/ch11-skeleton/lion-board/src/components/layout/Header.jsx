@@ -22,7 +22,7 @@ export default function Header() {
               height="40"
               alt="로고 이미지"
             />
-            <span className="text-lg font-bold">멋사컴</span>
+            <span className="text-lg font-bold">멋사컴쓰!</span>
           </Link>
         </div>
         <div className="w-auto order-2 text-base mt-4 md:mt-0">
