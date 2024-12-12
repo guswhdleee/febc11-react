@@ -1,4 +1,4 @@
-import ListItem from "@pages/board/ListItem";
+import ListItem from "@pages/board/Listitem";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "@hooks/useAxiosInstance";
